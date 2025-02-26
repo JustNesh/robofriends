@@ -2,24 +2,18 @@ import React, {useEffect, useState} from "react";
 import CardList from "../components/CardList";
 import SearchBox from "../components/SearchBox.js"
 import Scroll from "../components/Scroll.js"
-import "./app.css"
 
 function App() {
     const [robots, setRobots] = useState([]);
     const [searchfield, setSearchfield] = useState('')
+    const [count, setCount] = useState(0);
 
-
-    // componentDidMount() {
-    //     fetch('https://jsonplaceholder.typicode.com/users').then(response=> response.json())
-    //         .then(users => this.setState({robots: users}));
-    // }
     useEffect(()=> {
         fetch('https://jsonplaceholder.typicode.com/users').then(response=> response.json())
         .then(users => setRobots(users));
-    },setRobots)
+    },[])
 
     function onSearchChange(event) {
-        // this.setState({searchfield:event.target.value})
         setSearchfield(event.target.value)
     };
         const filteredRobots = robots.filter(robot => {
@@ -37,6 +31,8 @@ function App() {
             <div className="tc">
                 <h1 className="f1">RoboFriends</h1>
                 <SearchBox searchChange = {onSearchChange}/>
+                <button onClick={() => setCount(count+1)}>Click Me!</button>
+                <h2>{count}</h2>
                 <Scroll>
                     <CardList robots = {filteredRobots}/>
                 </Scroll>
