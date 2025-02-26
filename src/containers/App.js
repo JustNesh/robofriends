@@ -13,6 +13,10 @@ function App() {
     //     fetch('https://jsonplaceholder.typicode.com/users').then(response=> response.json())
     //         .then(users => this.setState({robots: users}));
     // }
+    useEffect(()=> {
+        fetch('https://jsonplaceholder.typicode.com/users').then(response=> response.json())
+        .then(users => setRobots(users));
+    },setRobots)
 
     function onSearchChange(event) {
         // this.setState({searchfield:event.target.value})
